@@ -1,0 +1,66 @@
+abstract class EnergySource {
+    int sourceId;
+    String name;
+    double energyGenerated; 
+
+    
+    EnergySource(int sourceId, String name, double energyGenerated) {
+        this.sourceId = sourceId;
+        this.name = name;
+        this.energyGenerated = energyGenerated;
+    }
+
+    
+    abstract double calcEfficiency();
+}
+
+
+class SolarEnergy extends EnergySource {
+    
+    SolarEnergy(int sourceId, String name, double energyGenerated) {
+        super(sourceId, name, energyGenerated);
+    }
+
+    double calcEfficiency() {
+        return (energyGenerated / 5000.0) * 100.0;
+    }
+
+    
+    void displaySolarInfo() {
+        System.out.println("Source ID: " + sourceId);
+        System.out.println("Source Name: " + name);
+        System.out.println("Energy Generated: " + energyGenerated + " kW");
+        System.out.println("Solar Efficiency: "+ calcEfficiency());
+        
+    }
+}
+
+class WindEnergy extends EnergySource {
+    
+    WindEnergy(int sourceId, String name, double energyGenerated) {
+        super(sourceId, name, energyGenerated);
+    }
+
+    public double calcEfficiency() {
+        return (energyGenerated / 8000.0) * 100.0;
+    }
+    public void displayWindInfo() {
+        System.out.println("Source ID: " + sourceId);
+        System.out.println("Source Name: " + name);
+        System.out.println("Energy Generated: " + energyGenerated + " kW");
+        System.out.println("Wind Efficiency: "+ calcEfficiency());
+        
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        
+        SolarEnergy solar = new SolarEnergy(101, "Sahara Solar Array", 1200.0);
+        
+        WindEnergy wind = new WindEnergy(102, "North Sea Wind Farm", 3600.0);
+
+        solar.displaySolarInfo();
+        wind.displayWindInfo();
+    }
+}
